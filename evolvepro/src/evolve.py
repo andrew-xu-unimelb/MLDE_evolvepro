@@ -128,6 +128,7 @@ def directed_evolution_simulation(
                     embeddings_pd=embeddings, labels_pd=labels_new,
                     measured_var=measured_var, regression_type=regression_type, top_n=top_n, final_round=final_round)
                 # Perform mutant selection for the next round based on the results of the current round
+                # NOTE: specific methods used for selecting which mutations are to be used for the next round
                 if learning_strategy == 'dist':
                     iteration_new_ids = df_test_new.sort_values(by='dist_metric', ascending=False).head(num_mutants_per_round).variant
                 elif learning_strategy == 'random':
@@ -359,7 +360,7 @@ def evolve_experimental(
     wt_fasta_path : str,
     rename_WT : bool = False,
     number_of_variants : int = 12,
-    output_dir : str = '/orcd/archive/abugoot/001/Projects/Matteo/Github/EvolvePro/output/exp_results/'
+    output_dir : str = 'content/output/evolution_output'
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]: 
 
     """

@@ -91,8 +91,10 @@ def run(args): # bulk of the embedding code here
     args.output_dir.mkdir(parents=True, exist_ok=True)
     return_contacts = "contacts" in args.include
 
+    # makes sure the representation layer exists, then specifies representation layer(s) in the model
     assert all(-(model.num_layers + 1) <= i <= model.num_layers for i in args.repr_layers)
     repr_layers = [(i + model.num_layers + 1) % (model.num_layers + 1) for i in args.repr_layers]
+    # repr_layers = 33, ESM2 650M model has 33 layers
 
     with torch.no_grad():
         for batch_idx, (labels, strs, toks) in enumerate(data_loader):
@@ -104,9 +106,18 @@ def run(args): # bulk of the embedding code here
             
             print(f"Device: {toks.device}")
 
+            # get representation tensor
             out = model(toks, repr_layers=repr_layers, return_contacts=return_contacts)
 
             logits = out["logits"].to(device="cpu")
+
+            #print(out["representations"][33].shape)
+            # type(out["representations"]) is a dictionary, with each key representing a layer
+            # e.g. if input is last layer of ESM2 650M model, there will only be one key - 33
+            # with a input of 16 amino acids, generating 305 sequences, with 30 sequences per batch, the representation shape is [30, 18, 1280]
+            # with a input of 10 amino acids, generating 191 sequences, with 46 sequences per batch, the representation shape is [46, 12, 1280]
+            # therefore, can conclude that ESM2 650M model has embedding dimension of 1280
+
             representations = {
                 layer: t.to(device="cpu") for layer, t in out["representations"].items()
             }
@@ -125,11 +136,16 @@ def run(args): # bulk of the embedding code here
                         layer: t[i, 1 : truncate_len + 1].clone()
                         for layer, t in representations.items()
                     }
+
+                # takes the mean representation across the entire amino acid sequence
+                # note - the specific representation for each amino acid is context-dependent
+                # i.e. the 'A' in ACT vs TAC has a different representation embedding
                 if "mean" in args.include:
                     result["mean_representations"] = {
                         layer: t[i, 1 : truncate_len + 1].mean(0).clone()
                         for layer, t in representations.items()
                     }
+
                 if "bos" in args.include:
                     result["bos_representations"] = {
                         layer: t[i, 0].clone() for layer, t in representations.items()

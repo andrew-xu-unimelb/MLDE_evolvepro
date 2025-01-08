@@ -135,6 +135,7 @@ def top_layer(iter_train, iter_test, embeddings_pd, labels_pd, measured_var, reg
 
 
     # fit
+    # NOTE: bulk of the top layer ML is here
     if regression_type == 'ridge':
         model = linear_model.RidgeCV()
     elif regression_type == 'lasso':
