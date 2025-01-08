@@ -12,6 +12,7 @@ import pandas as pd
 import torch
 
 from esm import Alphabet, FastaBatchedDataset, ProteinBertModel, pretrained, MSATransformer
+#from flash_attn.modules.mha import FlashMHA # flash attention module
 
 
 def create_parser():
@@ -69,8 +70,19 @@ def create_parser():
 
     return parser
 
+# utility function for implementing flash attention at ESM model inference
+#def replace_attention_with_flash(model):
+#    for name, module in model.named_modules():
+#        if isinstance(module, torch.nn.MultiheadAttention):
+#            setattr(model, name, FlashMHA(
+#                embed_dim=module.embed_dim,
+#                num_heads=module.num_heads,
+#                bias=module.in_proj_bias is not None
+#            ))
+
 def run(args): # bulk of the embedding code here
     model, alphabet = pretrained.load_model_and_alphabet(args.model_location)
+    #replace_attention_with_flash(model) # replacing traditional attentional layers with flash attention
     model.eval()
     if isinstance(model, MSATransformer):
         raise ValueError(
