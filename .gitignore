@@ -1,5 +1,7 @@
 # macOS system files
 .DS_Store
+
+# virtual environment & dependencies
 .env
 
 # Jupyter Notebook checkpoints
@@ -8,6 +10,7 @@
 # Data and output directories
 data/exp
 output/
+content/output
 
 # Python package info
 evolvepro.egg-info
