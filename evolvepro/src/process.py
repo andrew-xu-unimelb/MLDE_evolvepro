@@ -355,10 +355,10 @@ def generate_single_aa_mutants(wt_fasta, output_file):
     for i, wt_aa in enumerate(wt_sequence):
         for mutant_aa in aa_alphabet:
             if mutant_aa != wt_aa:
-                mutant_sequence = wt_sequence[:i] + mutant_aa + wt_sequence[i+1:]
-                variant = f'{wt_aa}{i+1}{mutant_aa}'
+                mutant_sequence = wt_sequence[:i] + mutant_aa + wt_sequence[i+1:] #?????? just index the mutation instead of adding it
+                variant = f'{wt_aa}{i+1}{mutant_aa}' # wt aa letter, position, mutation aa letter
                 record = SeqRecord(Seq(mutant_sequence), id=variant, description="")
-                records.append(record)
+                records.append(record) # appending to the same SeqRecord object
 
     # Write the mutant sequences to a FASTA file
     os.makedirs(os.path.dirname(output_file), exist_ok=True)

@@ -47,7 +47,7 @@ def create_parser():
         "--include",
         type=str,
         nargs="+",
-        choices=["mean", "per_tok", "bos", "contacts"],
+        choices=["mean", "per_tok", "bos", "contacts"], #TODO: figure out what each of the choices represent (current execution code has 'mean')
         help="specify which representations to return",
         required=True,
     )
@@ -69,7 +69,7 @@ def create_parser():
 
     return parser
 
-def run(args):
+def run(args): # bulk of the embedding code here
     model, alphabet = pretrained.load_model_and_alphabet(args.model_location)
     model.eval()
     if isinstance(model, MSATransformer):
