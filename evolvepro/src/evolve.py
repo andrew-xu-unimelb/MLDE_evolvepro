@@ -121,7 +121,7 @@ def directed_evolution_simulation(
             else:
                 # Perform mutant selection for the subsequent rounds
                 iteration_old = iteration_new
-                print("iterations considered", iteration_old)
+                #print("iterations considered", iteration_old)
                 
                 train_error, test_error, train_r_squared, test_r_squared, alpha, median_activity_scaled, top_activity_scaled, top_variant, top_final_round_variants, activity_binary_percentage, spearman_corr, df_test_new, this_round_variants = top_layer(
                     iter_train=iteration_old['iteration'].unique().tolist(), iter_test=None,

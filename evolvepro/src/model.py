@@ -15,11 +15,11 @@ from scipy.spatial.distance import cdist
 def first_round(labels, embeddings, explicit_variants=None, num_mutants_per_round=16, first_round_strategy='random', embedding_type = None,random_seed=None):
 
     # Filter out 'WT' variant from labels
-    print("Starting labels length:", len(labels))
+    #print("Starting labels length:", len(labels))
 
     variants_without_WT = labels.variant[labels.variant != 'WT']
 
-    print("Starting non-wt length:", len(variants_without_WT))
+    #print("Starting non-wt length:", len(variants_without_WT))
 
     # Perform random first round search strategy
     if first_round_strategy == 'random':
@@ -36,17 +36,17 @@ def first_round(labels, embeddings, explicit_variants=None, num_mutants_per_roun
         num_clusters = num_mutants_per_round
 
         # Remove 'WT' variant from embeddings
-        print("embeddings:", len(embeddings))
+        #print("embeddings:", len(embeddings))
         if 'WT' in embeddings.index:
             embeddings_without_WT = embeddings.drop('WT')
         else:
             embeddings_without_WT = embeddings.copy()
 
-        print("embeddings without wildtype:", len(embeddings_without_WT))
+        #print("embeddings without wildtype:", len(embeddings_without_WT))
 
         # Perform PCA with 10 dimensions
         if embedding_type != 'embeddings_pca':
-            print("Performing PCA on embeddings")
+            #print("Performing PCA on embeddings")
             pca = PCA(n_components=10)
             pca_embeddings = pca.fit_transform(embeddings_without_WT)
             pca_embeddings_reduced = pca_embeddings[:, :10]
@@ -124,12 +124,12 @@ def top_layer(iter_train, iter_test, embeddings_pd, labels_pd, measured_var, reg
 
     if iter_test is not None:
         y_test = labels[iteration.isin([iter_test])][measured_var]
-        print(y_test.shape)
+        #print(y_test.shape)
         y_test_activity_scaled = labels[iteration.isin([iter_test])]['activity_scaled']
         y_test_activity_binary = labels[iteration.isin([iter_test])]['activity_binary']
     else:
         y_test = labels[iteration.isna()][measured_var]
-        print(y_test.shape)
+        #print(y_test.shape)
         y_test_activity_scaled = labels[iteration.isna()]['activity_scaled']
         y_test_activity_binary = labels[iteration.isna()]['activity_binary']        
 
