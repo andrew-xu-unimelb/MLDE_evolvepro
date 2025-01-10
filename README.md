@@ -18,8 +18,8 @@
         - [TODO] Add explanation of intuition
         - [Done] Use base source code to run dsm grid search (only on Jones embeddings)
         - [Done] Visualise K-medoid clustering for PCA embeddings
-        - [Doing] Read [intrinsic dimension reduction](https://huggingface.co/blog/AmelieSchreiber/intrinsic-dimension-of-proteins) article for ESM2 
-        - [TODO] Implement inrinsic dimension reduction, then perform PCA and compare the two embeddings.
+        - [Done] Read [intrinsic dimension reduction](https://huggingface.co/blog/AmelieSchreiber/intrinsic-dimension-of-proteins) article for ESM2 
+        - [Done] Implement UMAP, then perform PCA and compare the two embeddings.
 
 **Lab stuff**
 - Read transfection steps
