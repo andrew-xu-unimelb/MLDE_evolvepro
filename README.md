@@ -22,7 +22,8 @@
     - Optimise the cost effectiveness of number of first round variants
         - [TODO] Create a cost effectivess chart of number of first round variants to final round activity:round ratio
     - [TODO] use ESM3 to create embeddings
-    - [TODO] use ESMC to create embeddings
+    - [Done] use ESMC to create embeddings
+    - [Done] group mutations based on amino acid position (before mutation) - see if they cluster on PCA
 
 - Surrogate objective functions
     - [TODO] Structure prediction with OmegaFold
