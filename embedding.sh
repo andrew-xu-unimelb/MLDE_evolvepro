@@ -5,7 +5,9 @@
 #SBATCH --error=slurm_outputs/dsm_embedding_%j.err
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=128G
+#SBATCH --mem=64
+#SBATCH --partition=gpuq
+#SBATCH --gres=gpu:A100:1
 #SBATCH --ntasks=1
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user=xu.a@wehi.edu.au
