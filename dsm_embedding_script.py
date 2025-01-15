@@ -37,7 +37,7 @@ brenan_df, brenan_frac = process_dataset(
 
 # simulating system command-line input for arguments
 sys.argv = ['evolvepro/plm/esm/extract.py', 
-            'esm1b_t33_650M_UR50S', # model name
+            '/./vast/projects/G000448_Protein_Design/model_weights/esm2_t48_15B_UR50D.pt', # model path
             'output/dms/jones.fasta', # input sequence fasta file
             'output/dms/embeddings', # output location
             '--toks_per_batch', '512',
