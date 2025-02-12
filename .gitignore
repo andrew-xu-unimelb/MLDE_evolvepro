@@ -10,6 +10,7 @@
 # Data and output directories
 data/exp
 output/
+data/output/
 content/output
 
 # Python package info
