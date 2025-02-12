@@ -3,6 +3,7 @@
 
 ##### Setup
 - Make virtual environment
-'''Python
+```python
 pip install -r requirements.txt
-'''
+```
+- 
