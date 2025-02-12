@@ -113,7 +113,8 @@ def model_simulation(
             top_activity = top_chunk['y_actual'].max()
             top_variant = top_chunk.loc[top_chunk['y_actual'].idxmax(), 'variant']
             top_final_round_variants = ' '.join(top_chunk['variant'].tolist())
-            activity_binary_percentage = top_chunk['y_actual_binary'].mean()
+            activity_binary_percentage = top_chunk['y_actual_binary'].sum() / top_k
+            #activity_binary_percentage = top_chunk['y_actual_binary'].mean()
             
             # decide how to pick the next round's variants
             df_predictions = pd.DataFrame({
