@@ -41,3 +41,5 @@ venv/
 *.venv
 env/
 *.env
+dimension_reduction_efficacy.ipynb
+hidden_layer_test.ipynb
